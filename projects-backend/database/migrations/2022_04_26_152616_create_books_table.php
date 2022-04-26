@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('Pages');
             $table->date('PublicationDate');
             $table->string('AmazonLink');
-            $table->string('CoverImg');
+            $table->string('CoverImg')->nullable();
             $table->timestamps();
         });
     }
