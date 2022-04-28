@@ -28,21 +28,28 @@
     align-items: center;
 }
 
+
 .modal-body{
-    display: flex;
+        /* display: flex; */
     margin-top: 1rem;
-    flex-direction: row;
+    /* flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: space-between;
+    align-items: center; */
 }
 
 .modal-input-container{
+    display: flex;
    text-align: center;
+   flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
-.modal-input-container *{
+/* .modal-input-container *{
     margin: 10px;
-}
+} */
 
 .modal-pic-img{
     margin: 50px 300px;
@@ -54,9 +61,10 @@
     background-color: #ff8e1f;
     color: white;
     border-radius: 5px;
-    padding: 5px;
+    padding: 10px;
     font-size: 16px;
     cursor: pointer;
+    
 }
 
 
@@ -75,8 +83,11 @@
     margin-left: 2rem;
 }
 
+
+
 .page-title{
     font-family: 'Roboto', sans-serif;
+    color: #ff8e1f;
     font-size: 1.5rem;
     font-weight: bold;
 }
@@ -85,7 +96,7 @@
     margin: 2rem;
     display: flex;
     flex-wrap: wrap;  
-}
+    }
 
 .book-item{
     width: 30%;
@@ -99,6 +110,7 @@
     border-radius: 5px;
     box-shadow: 0px 0px 5px #ccc;
     padding: 1rem 0;
+    cursor: pointer;
 }
 
 
@@ -108,7 +120,16 @@ img {
 }
 
 hr{
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ff8e1f;
     margin: 0px 30px;
+}
+
+.delete-btn{
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
