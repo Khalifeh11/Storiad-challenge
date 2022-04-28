@@ -47,14 +47,14 @@ class BookController extends Controller
     public function get_all_books()
     {
         $books = Book::all();
-        return response()->json(['success' => $books], 200);
+        return response()->json(['books' => $books], 200);
     }
 
     public function get_book(Request $request)
     {
         $book = Book::find($request->id);
         if ($book) {
-            return response()->json(['success' => $book], 200);
+            return response()->json(['book' => $book], 200);
         }else{
             return response()->json(['error' => 'Book not found.'], 404);
         }
