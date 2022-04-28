@@ -50,9 +50,9 @@ class BookController extends Controller
         return response()->json(['books' => $books], 200);
     }
 
-    public function get_book(Request $request)
+    public function get_book($id)
     {
-        $book = Book::find($request->id);
+        $book = Book::find($id);
         if ($book) {
             return response()->json(['book' => $book], 200);
         }else{
@@ -81,7 +81,6 @@ class BookController extends Controller
             'publication_date' => 'string|max:255',
             'amazon_link' => 'string|max:255',
         ]);
-
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }else{
@@ -117,7 +116,7 @@ class BookController extends Controller
             }
             $book->save();
             
-            return response()->json(['success' => 'Book updated successfully.'], 201);
+            return response()->json(['book' => $book], 201);
         }
     }
 
@@ -137,7 +136,6 @@ class BookController extends Controller
         $imageName = "random(".rand(10,1000).")".'.'.'jpeg';
         $path=public_path();
         \File::put($path. '/images/' . $imageName, base64_decode($image));
-        // $user_id = auth()->user()->id;
         $book_id = $request->book_id;
         $book = Book::find($book_id);
         $book->coverImg = '/images/'.$imageName;
