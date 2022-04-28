@@ -7,8 +7,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landing/>} />
-          <Route path="/book" element={<Book/>} />
+          <Route exact path="/" element={<Landing/>} />
+          <Route exact path="/book" element={<Book/>} />
         </Routes>
       </BrowserRouter>
     </div>
