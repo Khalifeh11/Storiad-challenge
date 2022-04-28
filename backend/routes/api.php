@@ -22,6 +22,7 @@ use App\Http\Controllers\BookController;
     Route::post('/update_book/{id}', [BookController::class, 'update_book'])->name('update_book');
     Route::get('/delete_book/{id}', [BookController::class, 'delete_book'])->name('delete_book');
     Route::post('/add_cover_img', [BookController::class, 'add_cover_img'])->name('add_cover_img');
+    Route::get('/get_book/{id}', [BookController::class, 'get_book'])->name('get_book');
     
 
 
