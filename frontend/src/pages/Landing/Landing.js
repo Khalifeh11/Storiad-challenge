@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { TextField } from "@mui/material";
-import { Avatar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Landing() {
   const [booksFetched, setBooksFetched] = useState([]);
@@ -38,14 +38,14 @@ function Landing() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 800,
+    width: 620,
     bgcolor: "background.paper",
     border: "2px solid #ff8e1f",
     borderRadius: "8px",
     boxShadow: 24,
     p: 4,
-    overflowY: "scroll", 
-    maxHeight: "80%"
+    // overflowY: "scroll",
+    // maxHeight: "80%",
   };
 
   const [bookdata, setBookData] = useState({
@@ -144,6 +144,20 @@ function Landing() {
     }
   };
 
+  const deleteBook = async (id) => {
+    try {
+      const res = await axios.get(`${url}/api/delete_book/${id}`);
+      const data = res.data;
+      if (data.success) {
+        fetchBooks();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="header">
@@ -169,15 +183,13 @@ function Landing() {
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Add your new book
               </Typography>
-              <button className="submit-btn" onClick={handleSubmit}>
-                submit
-              </button>
+              
             </div>
 
             <div className="modal-body">
-              <div className="modal-pic-img">
+              {/* <div className="modal-pic-img">
                 <img src={`${url}/images/no-cover.png`} alt="book cover" />
-              </div>
+              </div> */}
               <div className="modal-input-container">
                 <TextField
                   label="Book Title"
@@ -270,6 +282,9 @@ function Landing() {
                   value={bookdata.price}
                 />
               </div>
+              <button className="submit-btn" onClick={handleSubmit}>
+                submit
+              </button>
             </div>
           </Box>
         </Modal>
@@ -277,7 +292,12 @@ function Landing() {
       <div className="book-list">
         {booksFetched.map((book) => (
           <div className="book-item" key={book.id}>
-            <div className="book-cover">
+            <div
+              className="book-cover"
+              onClick={() => {
+                navigate("/book", { state: { id: book.id } });
+              }}
+            >
               {book.CoverImg ? (
                 <BookCover image={`${url}${book.CoverImg}`} />
               ) : (
@@ -292,8 +312,15 @@ function Landing() {
                 <h5>Author: {book.Author}</h5>
               </div>
               <div className="book-publisher">
-                <h5>Publisher: {book.Publisher}</h5>
+                <h5>Price: {book.Price}</h5>
               </div>
+              <div className="delete-btn-container"></div>
+              <button
+                className="delete-btn"
+                onClick={() => deleteBook(book.id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
